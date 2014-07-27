@@ -28,11 +28,9 @@ public class StateObject : Photon.MonoBehaviour {
 	int currStateIndex = 0;
 	int nextStateIndex = 0;
 	float startTime;
-	private PhotonView photonView;
 
 	void Start () {
 		SetState (initStateIndex);
-		photonView = PhotonView.Get (this);
 		PhotonNetwork.sendRate = sendRate; 
 		PhotonNetwork.sendRateOnSerialize = sendRateOnSerialize;
 	}
