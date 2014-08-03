@@ -40,8 +40,10 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+
         if (stream.isWriting)
         {
+			Debug.Log ("OnPhotonSerializeView - WRITING");
             //We own this player: send the others our data
            // stream.SendNext((int)controllerScript._characterState);
             stream.SendNext(transform.position);
@@ -51,6 +53,7 @@ public class ThirdPersonNetworkVik : Photon.MonoBehaviour
         }
         else
         {
+			Debug.Log ("OnPhotonSerializeView - READING");
             //Network player, receive data
             //controllerScript._characterState = (CharacterState)(int)stream.ReceiveNext();
             correctPlayerPos = (Vector3)stream.ReceiveNext();
