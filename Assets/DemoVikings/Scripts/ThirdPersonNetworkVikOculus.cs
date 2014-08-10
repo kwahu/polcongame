@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-
-public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
+public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 {
 	ThirdPersonCameraNETOculus cameraScript;
     ThirdPersonControllerNET controllerScript;
@@ -95,4 +95,38 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
         rens[0].enabled = mybools[0];//Axe
         rens[1].enabled = mybools[1];//Shield
     }
+
+	#region ICoinCollector
+	
+	private List<Coin> collectedCoins = new List<Coin>();
+	public List<Coin> CollectedCoins 
+	{ 
+		get 
+		{
+			return collectedCoins;
+		}
+		set 
+		{
+			collectedCoins = value;
+		}
+	}
+	
+	public void GiveCoins(List<Coin> coins)
+	{
+		foreach (var coin in coins) 
+		{
+			collectedCoins.Add(coin);
+		}
+	}
+	
+	public List<Coin> TakeCoins()
+	{
+		var coinsCopy = collectedCoins;
+		
+		collectedCoins.Clear();
+		
+		return coinsCopy;
+	}
+	
+	#endregion
 }
