@@ -7,6 +7,8 @@ public class Respawn : MonoBehaviour {
 	public GameObject respawnedObject;
 	public int renewalTime = 20; // seconds
 	public bool respawned;
+	public bool respawnJustOnce = false;
+	public bool activeRespawn = true;
 
 	void Start()
 	{
@@ -62,9 +64,17 @@ public class Respawn : MonoBehaviour {
 
 	void RespawnObject()
 	{
-		Show();
+		if ( !respawned && activeRespawn )
+		{
+			Show();
 
-		respawned = true;
+			respawned = true;
+
+			if ( respawnJustOnce )
+			{
+				activeRespawn = false;
+			}
+		}
 	}
 
 	void Hide()

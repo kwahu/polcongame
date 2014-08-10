@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class StatsHud : Photon.MonoBehaviour {
 
@@ -10,7 +11,7 @@ public class StatsHud : Photon.MonoBehaviour {
 
 		string playerData = "";
 		foreach (var player in players) {
-			playerData = "\n" + player.name + " | TODO coins";
+			playerData = "\n" + player.name + " | " + player.customProperties.ToStringFull();
 		}
 
 		return "Player | Coins" + playerData;
