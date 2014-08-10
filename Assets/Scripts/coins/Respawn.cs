@@ -38,13 +38,16 @@ public class Respawn : Photon.MonoBehaviour {
 	
 	void Update () 
 	{
-		if ( !respawned )
+		if (!photonView.isMine)
 		{
-			RespawnWithDelay();
-			return;
-		}
+			if ( !respawned )
+			{
+				RespawnWithDelay();
+				return;
+			}
 
-		transform.Rotate(0f,1f,0);
+			transform.Rotate(0f,1f,0);
+		}
 	}
 
 	void RespawnWithDelay()
@@ -78,4 +81,29 @@ public class Respawn : Photon.MonoBehaviour {
 	{
 		renderer.enabled = true;
 	}
+
+	#region Proton part
+
+	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+	{
+		
+		if (stream.isWriting)
+		{
+			stream.SendNext(timeToNextRespawn);
+			stream.SendNext(respawned);
+			stream.SendNext(respawnJustOnce); 
+			stream.SendNext(activeRespawn);
+			stream.SendNext(coinsToPick);
+		}
+		else
+		{
+			timeToNextRespawn = (float)stream.ReceiveNext();
+			respawned = (bool)stream.ReceiveNext();
+			respawnJustOnce = (bool)stream.ReceiveNext();
+			activeRespawn = (bool)stream.ReceiveNext();
+			coinsToPick = (List<Coin>)stream.ReceiveNext();
+		}
+	}
+			
+	#endregion
 }
