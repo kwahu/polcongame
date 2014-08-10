@@ -21,6 +21,8 @@ public class Respawn : MonoBehaviour {
 
 			if ( coinCollector != null )
 			{
+				Hide();
+
 				coinCollector.GiveCoins(new List<Coin> { new Coin() });
 			}
 
@@ -60,6 +62,18 @@ public class Respawn : MonoBehaviour {
 
 	void RespawnObject()
 	{
+		Show();
+
 		respawned = true;
+	}
+
+	void Hide()
+	{
+		renderer.enabled = false;
+	}
+
+	void Show()
+	{
+		renderer.enabled = true;
 	}
 }

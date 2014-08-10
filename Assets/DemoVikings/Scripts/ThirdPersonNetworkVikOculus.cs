@@ -49,6 +49,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(rigidbody.velocity); 
+			stream.SendNext(collectedCoins);
 
         }
         else
@@ -58,6 +59,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             rigidbody.velocity = (Vector3)stream.ReceiveNext();
+			collectedCoins = (List<Coin>)stream.ReceiveNext();
 
             if (!appliedInitialUpdate)
             {
