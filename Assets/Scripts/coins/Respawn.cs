@@ -2,13 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Respawn : MonoBehaviour {
+public class Respawn : Photon.MonoBehaviour {
+	
+	public float timeToNextRespawn = 0;
 
-	public GameObject respawnedObject;
 	public int renewalTime = 20; // seconds
 	public bool respawned;
 	public bool respawnJustOnce = false;
 	public bool activeRespawn = true;
+	public List<Coin> coinsToPick = new List<Coin> { new Coin() };
 
 	void Start()
 	{
@@ -25,7 +27,9 @@ public class Respawn : MonoBehaviour {
 			{
 				Hide();
 
-				coinCollector.GiveCoins(new List<Coin> { new Coin() });
+				timeToNextRespawn = renewalTime;
+
+				coinCollector.GiveCoins(coinsToPick);
 			}
 
 			respawned = false;
@@ -43,28 +47,16 @@ public class Respawn : MonoBehaviour {
 		transform.Rotate(0f,1f,0);
 	}
 
-	IEnumerator StartWait()
-	{
-		yield return StartCoroutine(Wait());
-	}
-
-	IEnumerator Wait()
-	{
-		yield return new WaitForSeconds(renewalTime);      
-	}
-
 	void RespawnWithDelay()
 	{
-		respawned = true;
-
-		StartWait();
+		timeToNextRespawn -= Time.deltaTime;
 
 		RespawnObject();
 	}
 
 	void RespawnObject()
 	{
-		if ( !respawned && activeRespawn )
+		if ( !respawned && activeRespawn && timeToNextRespawn <= 0 )
 		{
 			Show();
 
