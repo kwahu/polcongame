@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerCollisions : MonoBehaviour
+public class PlayerCollisionsGry : MonoBehaviour
 {
 
 		public float forceFactor = 10000;
-		public AudioClip DoorSound;
+		public AudioClip Stop;
+		public AudioClip Switch;
 
 		// Update is called once per frame
 		void Update ()
@@ -19,7 +20,7 @@ public class PlayerCollisions : MonoBehaviour
 		{
 				RaycastHit hit;
 
-				Physics.Raycast (transform.position, transform.forward, out hit, 2);
+				Physics.Raycast (transform.position, transform.forward, out hit, 10);
 				Debug.DrawLine (transform.position, hit.point, Color.green, 2, false);
 
 				if (hit.collider != null) {
@@ -29,11 +30,12 @@ public class PlayerCollisions : MonoBehaviour
 						
 				
 						if (obj.tag == "enemy") {
-								obj.rigidbody.AddForce (forceFactor * transform.forward);
-						}
-						if (obj.tag == "door") {
+								audio.PlayOneShot (Stop);
 								
-								audio.PlayOneShot(DoorSound);
+						}
+						if (obj.tag == "switch") {
+								
+								audio.PlayOneShot (Switch);
 								
 						}
 			
