@@ -10,8 +10,8 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
 
     void Awake()
     {
-        cameraScript = GetComponent<ThirdPersonCameraNETOculus>();
-        controllerScript = GetComponent<ThirdPersonControllerNET>();
+       // cameraScript = GetComponent<ThirdPersonCameraNETOculus>();
+       // controllerScript = GetComponent<ThirdPersonControllerNET>();
 
     }
     void Start()
@@ -20,17 +20,18 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
         if (photonView.isMine)
         {
             //MINE: local player, simply enable the local scripts
-            cameraScript.enabled = true;
-            controllerScript.enabled = true;
-			GameObject obj = GameObject.FindGameObjectWithTag("oculus");
+          //  cameraScript.enabled = true;
+         //   controllerScript.enabled = true;
+			GameObject obj = GameObject.Find("PC camera");//FindGameObjectWithTag("oculus");
+			Debug.Log (obj);
 			obj.transform.parent = transform;
-			obj.transform.localPosition = new Vector3(0, 2, -10);
-			obj.transform.localEulerAngles = new Vector3(10, 0, 0);
+			obj.transform.localPosition = new Vector3(0, 2, 0);
+			obj.transform.localEulerAngles = new Vector3(0, 0, 0);
 
         }
         else
         {           
-            cameraScript.enabled = false;
+           // cameraScript.enabled = false;
             controllerScript.enabled = true;
 
         }
@@ -92,7 +93,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
-        rens[0].enabled = mybools[0];//Axe
-        rens[1].enabled = mybools[1];//Shield
+//        rens[0].enabled = mybools[0];//Axe
+    //    rens[1].enabled = mybools[1];//Shield
     }
 }
