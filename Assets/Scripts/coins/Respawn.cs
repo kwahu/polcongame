@@ -91,7 +91,8 @@ public class Respawn : Photon.MonoBehaviour {
 
 	void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
 	{
-		
+		var visibleOld = Visible;
+
 		if (stream.isWriting)
 		{
 			stream.SendNext(timeToNextRespawn);
@@ -108,8 +109,6 @@ public class Respawn : Photon.MonoBehaviour {
 			respawnJustOnce = (bool)stream.ReceiveNext();
 			activeRespawn = (bool)stream.ReceiveNext();
 			coinsToPick = (int)stream.ReceiveNext();
-
-			var visibleOld = Visible;
 
 			Visible = (bool)stream.ReceiveNext();
 

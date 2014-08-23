@@ -115,7 +115,10 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 	public int TakeCoins ()
 	{
 		int coins = CollectedCoins;
-		return CollectedCoins;
+
+		CollectedCoins = 0;
+
+		return coins;
 	}
 
 	int collectedCoins = 0;
