@@ -49,7 +49,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(rigidbody.velocity); 
-			stream.SendNext(collectedCoins);
+			stream.SendNext(CollectedCoins);
 
         }
         else
@@ -59,7 +59,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             rigidbody.velocity = (Vector3)stream.ReceiveNext();
-			collectedCoins = (List<Coin>)stream.ReceiveNext();
+			collectedCoins = (int)stream.ReceiveNext();
 
             if (!appliedInitialUpdate)
             {
@@ -98,37 +98,28 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
         rens[1].enabled = mybools[1];//Shield
     }
 
-	#region ICoinCollector
-	
-	private List<Coin> collectedCoins = new List<Coin>();
-	public List<Coin> CollectedCoins 
-	{ 
-		get 
-		{
+	#region ICoinCollector implementation
+
+	public void GiveCoins (int coins)
+	{
+		CollectedCoins += coins;
+	}
+
+	public int TakeCoins ()
+	{
+		int coins = CollectedCoins;
+		return CollectedCoins;
+	}
+
+	int collectedCoins;
+	public int CollectedCoins {
+		get {
 			return collectedCoins;
 		}
-		set 
-		{
+		set {
 			collectedCoins = value;
 		}
 	}
-	
-	public void GiveCoins(List<Coin> coins)
-	{
-		foreach (var coin in coins) 
-		{
-			collectedCoins.Add(coin);
-		}
-	}
-	
-	public List<Coin> TakeCoins()
-	{
-		var coinsCopy = collectedCoins;
-		
-		collectedCoins.Clear();
-		
-		return coinsCopy;
-	}
-	
+
 	#endregion
 }

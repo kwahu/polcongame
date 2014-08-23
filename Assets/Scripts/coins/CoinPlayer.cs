@@ -3,8 +3,8 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 
-public class CoinPlayer : MonoBehaviour, ICoinCollector {
-
+public class CoinPlayer : MonoBehaviour, ICoinCollector 
+{
 	// Use this for initialization
 	void Start () {
 	
@@ -15,36 +15,27 @@ public class CoinPlayer : MonoBehaviour, ICoinCollector {
 	
 	}
 
-	#region ICoinCollector
+	#region ICoinCollector implementation
 
-	private List<Coin> collectedCoins;
-	public List<Coin> CollectedCoins 
-	{ 
-		get 
-		{
+	public void GiveCoins (int coins)
+	{
+		CollectedCoins += coins;
+	}
+	
+	public int TakeCoins ()
+	{
+		int coins = CollectedCoins;
+		return CollectedCoins;
+	}
+	
+	int collectedCoins;
+	public int CollectedCoins {
+		get {
 			return collectedCoins;
 		}
-		set 
-		{
+		set {
 			collectedCoins = value;
 		}
-	}
-
-	public void GiveCoins(List<Coin> coins)
-	{
-		foreach (var coin in coins) 
-		{
-			collectedCoins.Add(coin);
-		}
-	}
-
-	public List<Coin> TakeCoins()
-	{
-		var coinsCopy = collectedCoins;
-
-		collectedCoins.Clear();
-
-		return coinsCopy;
 	}
 
 	#endregion

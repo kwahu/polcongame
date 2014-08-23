@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public interface ICoinCollector {
 	
-	List<Coin> CollectedCoins { get; set; }
+	int CollectedCoins { get; set; }
 
 	// give coin to collector
-	void GiveCoins(List<Coin> coins);
+	void GiveCoins(int coins);
 
 	// recive coins from collector
-	List<Coin> TakeCoins();
+	int TakeCoins();
 }

@@ -10,7 +10,16 @@ public class Respawn : Photon.MonoBehaviour {
 	public bool respawned;
 	public bool respawnJustOnce = false;
 	public bool activeRespawn = true;
-	public List<Coin> coinsToPick = new List<Coin> { new Coin() };
+	public int coinsToPick = 1;
+	bool visible;
+	public bool Visible {
+		get {
+			return visible;
+		}
+		set {
+			visible = value;
+		}
+	}
 
 	void Start()
 	{
@@ -25,7 +34,7 @@ public class Respawn : Photon.MonoBehaviour {
 
 			if ( coinCollector != null )
 			{
-				Hide();
+				Visibility(false);
 
 				timeToNextRespawn = renewalTime;
 
@@ -38,7 +47,7 @@ public class Respawn : Photon.MonoBehaviour {
 	
 	void Update () 
 	{
-		if (!photonView.isMine)
+		if (photonView.isMine)
 		{
 			if ( !respawned )
 			{
@@ -61,7 +70,7 @@ public class Respawn : Photon.MonoBehaviour {
 	{
 		if ( !respawned && activeRespawn && timeToNextRespawn <= 0 )
 		{
-			Show();
+			Visibility(true);
 
 			respawned = true;
 
@@ -72,14 +81,10 @@ public class Respawn : Photon.MonoBehaviour {
 		}
 	}
 
-	void Hide()
+	void Visibility(bool visible)
 	{
-		renderer.enabled = false;
-	}
-
-	void Show()
-	{
-		renderer.enabled = true;
+		Visible = visible;
+		renderer.enabled = visible;
 	}
 
 	#region Proton part
@@ -94,6 +99,7 @@ public class Respawn : Photon.MonoBehaviour {
 			stream.SendNext(respawnJustOnce); 
 			stream.SendNext(activeRespawn);
 			stream.SendNext(coinsToPick);
+			stream.SendNext(Visible);
 		}
 		else
 		{
@@ -101,7 +107,16 @@ public class Respawn : Photon.MonoBehaviour {
 			respawned = (bool)stream.ReceiveNext();
 			respawnJustOnce = (bool)stream.ReceiveNext();
 			activeRespawn = (bool)stream.ReceiveNext();
-			coinsToPick = (List<Coin>)stream.ReceiveNext();
+			coinsToPick = (int)stream.ReceiveNext();
+
+			var visibleOld = Visible;
+
+			Visible = (bool)stream.ReceiveNext();
+
+			if ( Visible != visibleOld )
+			{
+				Visibility(Visible);
+			}
 		}
 	}
 			
