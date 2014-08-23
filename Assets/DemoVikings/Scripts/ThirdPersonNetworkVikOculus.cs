@@ -132,4 +132,15 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 	}
 
 	#endregion
+
+	int coinsInChest = 0;
+	public void MoveCoinsToChest ()
+	{
+		coinsInChest += TakeCoins();
+		
+		var h = new ExitGames.Client.Photon.Hashtable();
+		h.Add("coinsWithPlayerInChest", CollectedCoins);
+
+		photonView.owner.SetCustomProperties(h);
+	}
 }

@@ -11,10 +11,10 @@ public class StatsHud : Photon.MonoBehaviour {
 
 		string playerData = "";
 		foreach (var player in players) {
-			playerData += "\n" + player.name + " | " + player.customProperties["coinsWithPlayer"];
+			playerData += "\n" + player.name + " | " + player.customProperties["coinsWithPlayer"] + " | " + player.customProperties["coinsWithPlayerInChest"];
 		}
 
-		return "Player | Coins" + playerData;
+		return "Player | Coins | Chest Coins " + playerData;
 	}
 
 	void OnGUI ()
