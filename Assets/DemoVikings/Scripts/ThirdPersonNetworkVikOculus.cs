@@ -16,6 +16,9 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
     }
     void Start()
     {
+		var h = new Hashtable();
+		h.Add("coinsWithPlayer", CollectedCoins);
+
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!
         if (photonView.isMine)
         {
@@ -41,7 +44,6 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-
         if (stream.isWriting)
         {
             //We own this player: send the others our data
@@ -103,6 +105,11 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 	public void GiveCoins (int coins)
 	{
 		CollectedCoins += coins;
+
+		var h = new ExitGames.Client.Photon.Hashtable();
+		h.Add("coinsWithPlayer", CollectedCoins);
+
+		photonView.owner.SetCustomProperties(h);
 	}
 
 	public int TakeCoins ()
@@ -111,7 +118,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 		return CollectedCoins;
 	}
 
-	int collectedCoins;
+	int collectedCoins = 0;
 	public int CollectedCoins {
 		get {
 			return collectedCoins;
