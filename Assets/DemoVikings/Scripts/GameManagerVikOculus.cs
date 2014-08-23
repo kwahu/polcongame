@@ -1,18 +1,28 @@
 using UnityEngine;
 using System.Collections;
+using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class GameManagerVikOculus : Photon.MonoBehaviour {
 
-    // this is a object name (must be in any Resources folder) of the prefab to spawn as player avatar.
-    // read the documentation for info how to spawn dynamically loaded game objects at runtime (not using Resources folders)
-	string playerPrefabName = "Overseer";
-	//string playerPrefabName = "CharprefabOculus";
-	public GameObject Cameramain;
+	string playerPrefabName = "Overseer"; //a default spectator
 
     void OnJoinedRoom()
     {
+		SetHeroStatus (MainMenuVikOculus.selectedHero, true);
+		if(MainMenuVikOculus.selectedHero != null)
+			playerPrefabName = MainMenuVikOculus.selectedHero;
         StartGame();
     }
+
+	void SetHeroStatus(string name, bool state)
+	{
+		if(!MainMenuVikOculus.isHero()) 
+			return;
+
+		PhotonHashtable customSettings = PhotonNetwork.room.customProperties;
+		customSettings [name] = state;
+		PhotonNetwork.room.SetCustomProperties( customSettings );
+	}
     
     IEnumerator OnLeftRoom()
     {
@@ -20,6 +30,8 @@ public class GameManagerVikOculus : Photon.MonoBehaviour {
         //Wait untill Photon is properly disconnected (empty room, and connected back to main server)
         while(PhotonNetwork.room!=null || PhotonNetwork.connected==false)
             yield return 0;
+
+		SetHeroStatus (MainMenuVikOculus.selectedHero, false);
 
         Application.LoadLevel(Application.loadedLevel);
 
@@ -46,6 +58,7 @@ public class GameManagerVikOculus : Photon.MonoBehaviour {
 
     void OnDisconnectedFromPhoton()
     {
+		SetHeroStatus (MainMenuVikOculus.selectedHero, false);
         Debug.LogWarning("OnDisconnectedFromPhoton");
     }    
 }

@@ -10,30 +10,25 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
 
     void Awake()
     {
-       // cameraScript = GetComponent<ThirdPersonCameraNETOculus>();
-       // controllerScript = GetComponent<ThirdPersonControllerNET>();
-
+        cameraScript = GetComponent<ThirdPersonCameraNETOculus>();
+        controllerScript = GetComponent<ThirdPersonControllerNET>();
     }
     void Start()
     {
-        //TODO: Bugfix to allow .isMine and .owner from AWAKE!
         if (photonView.isMine)
         {
             //MINE: local player, simply enable the local scripts
-          //  cameraScript.enabled = true;
-         //   controllerScript.enabled = true;
+            cameraScript.enabled = true;
+            controllerScript.enabled = true;
 			GameObject obj = GameObject.Find("PC camera");//FindGameObjectWithTag("oculus");
-			Debug.Log (obj);
 			obj.transform.parent = transform;
 			obj.transform.localPosition = new Vector3(0, 2, 0);
 			obj.transform.localEulerAngles = new Vector3(0, 0, 0);
-
         }
         else
         {           
-           // cameraScript.enabled = false;
+            cameraScript.enabled = false;
             controllerScript.enabled = true;
-
         }
         controllerScript.SetIsRemotePlayer(!photonView.isMine);
 
@@ -42,7 +37,6 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-
         if (stream.isWriting)
         {
             //We own this player: send the others our data
