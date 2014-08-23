@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-
-public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
+public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 {
 	ThirdPersonCameraNETOculus cameraScript;
     ThirdPersonControllerNET controllerScript;
@@ -15,6 +15,13 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
     }
     void Start()
     {
+<<<<<<< HEAD
+=======
+		var h = new Hashtable();
+		h.Add("coinsWithPlayer", CollectedCoins);
+
+        //TODO: Bugfix to allow .isMine and .owner from AWAKE!
+>>>>>>> 4658fa44c732c288f5ce045cdcd0568e3d9c9cc8
         if (photonView.isMine)
         {
             //MINE: local player, simply enable the local scripts
@@ -44,6 +51,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
             stream.SendNext(rigidbody.velocity); 
+			stream.SendNext(CollectedCoins);
 
         }
         else
@@ -53,6 +61,7 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
             correctPlayerPos = (Vector3)stream.ReceiveNext();
             correctPlayerRot = (Quaternion)stream.ReceiveNext();
             rigidbody.velocity = (Vector3)stream.ReceiveNext();
+			collectedCoins = (int)stream.ReceiveNext();
 
             if (!appliedInitialUpdate)
             {
@@ -90,4 +99,54 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour
 //        rens[0].enabled = mybools[0];//Axe
     //    rens[1].enabled = mybools[1];//Shield
     }
+
+	#region ICoinCollector implementation
+
+	public void GiveCoins (int coins)
+	{
+		CollectedCoins += coins;
+
+		UpdatePlayerCoinsInfo();
+	}
+
+	public int TakeCoins ()
+	{
+		int coins = CollectedCoins;
+
+		UpdatePlayerCoinsInfo();
+
+		CollectedCoins = 0;
+
+		return coins;
+	}
+
+	int collectedCoins = 0;
+	public int CollectedCoins {
+		get {
+			return collectedCoins;
+		}
+		set {
+			collectedCoins = value;
+		}
+	}
+
+	#endregion
+
+	int coinsInChest = 0;
+	public void MoveCoinsToChest ()
+	{
+		coinsInChest += TakeCoins();
+		
+		UpdatePlayerCoinsInfo();
+	}
+
+	void UpdatePlayerCoinsInfo ()
+	{
+		var h = new ExitGames.Client.Photon.Hashtable();
+
+		h.Add("coinsWithPlayer", CollectedCoins);
+		h.Add("coinsWithPlayerInChest", coinsInChest);
+
+		photonView.owner.SetCustomProperties(h);
+	}
 }
