@@ -35,6 +35,7 @@ public class Switch : MonoBehaviour {
 		animator.SetBool("trigger", true);
 		
 		foreach (GameObject traget in targets){
+			Debug.Log (traget);
 			traget.SendMessage("NextState");
 		}
 	}

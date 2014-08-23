@@ -4,19 +4,20 @@ using System.Collections;
 public class PlayerCollisionsGry : MonoBehaviour
 {
 
-		public float forceFactor = 10000;
+		/*public float forceFactor = 10000;
 		public AudioClip Stop;
 		public AudioClip Switch;
+	public GameObject Kula;*/
 
 		// Update is called once per frame
 		void Update ()
 		{
 
-				if (Input.GetButtonDown ("Fire1"))
-						Hit ();
+				/*if (Input.GetButtonDown ("Fire1"))
+						Hit ();*/
 		}
 
-		void Hit ()
+		/*void Hit ()
 		{
 				RaycastHit hit;
 
@@ -26,20 +27,27 @@ public class PlayerCollisionsGry : MonoBehaviour
 				if (hit.collider != null) {
 						Debug.Log ("hit:" + hit.collider.name);
 						GameObject obj = hit.collider.gameObject;
-						
+				//void OnCollisionEnter(Collision theObject		
 						
 				
 						if (obj.tag == "enemy") {
-								audio.PlayOneShot (Stop);
+						obj.SendMessage("StopIt");
+								
 								
 						}
 						if (obj.tag == "switch") {
 								
-								audio.PlayOneShot (Switch);
+								
 								
 						}
 			
 			
 				}
-		}
+		}*/
+//	IEnumerator StopEnemy(){
+//				Kula.Animator = disabled;
+			//	yield return new WaitForSeconds (5.0f);
+			//	Kula.Animator = enabled;
+	//	}
+
 }
