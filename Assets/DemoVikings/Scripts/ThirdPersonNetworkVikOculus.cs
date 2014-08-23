@@ -106,15 +106,14 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 	{
 		CollectedCoins += coins;
 
-		var h = new ExitGames.Client.Photon.Hashtable();
-		h.Add("coinsWithPlayer", CollectedCoins);
-
-		photonView.owner.SetCustomProperties(h);
+		UpdatePlayerCoinsInfo();
 	}
 
 	public int TakeCoins ()
 	{
 		int coins = CollectedCoins;
+
+		UpdatePlayerCoinsInfo();
 
 		CollectedCoins = 0;
 
@@ -138,8 +137,15 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 	{
 		coinsInChest += TakeCoins();
 		
+		UpdatePlayerCoinsInfo();
+	}
+
+	void UpdatePlayerCoinsInfo ()
+	{
 		var h = new ExitGames.Client.Photon.Hashtable();
-		h.Add("coinsWithPlayerInChest", CollectedCoins);
+
+		h.Add("coinsWithPlayer", CollectedCoins);
+		h.Add("coinsWithPlayerInChest", coinsInChest);
 
 		photonView.owner.SetCustomProperties(h);
 	}
