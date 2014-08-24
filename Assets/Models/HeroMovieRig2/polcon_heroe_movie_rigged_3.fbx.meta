@@ -1,0 +1,361 @@
+fileFormatVersion: 2
+guid: f2d826405db0546c391e63c918ffed92
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Armature|chest
+    100004: Armature|FootLeft
+    100006: Armature|FootRight
+    100008: Armature|handLeft
+    100010: Armature|handRight
+    100012: Armature|head
+    100014: Armature|hips
+    100016: Armature|lowerArmLeft
+    100018: Armature|lowerArmRight
+    100020: Armature|LowerLegLeft
+    100022: Armature|lowerLegRight
+    100024: Armature|neck
+    100026: Armature|shoulderLeft
+    100028: Armature|ShoulderRight
+    100030: Armature|upperArmLeft
+    100032: Armature|upperArmRight
+    100034: Armature|upperLegLeft
+    100036: Armature|UpperLegRight
+    100038: maleBaseMesh
+    100040: //RootNode
+    400000: Armature
+    400002: Armature|chest
+    400004: Armature|FootLeft
+    400006: Armature|FootRight
+    400008: Armature|handLeft
+    400010: Armature|handRight
+    400012: Armature|head
+    400014: Armature|hips
+    400016: Armature|lowerArmLeft
+    400018: Armature|lowerArmRight
+    400020: Armature|LowerLegLeft
+    400022: Armature|lowerLegRight
+    400024: Armature|neck
+    400026: Armature|shoulderLeft
+    400028: Armature|ShoulderRight
+    400030: Armature|upperArmLeft
+    400032: Armature|upperArmRight
+    400034: Armature|upperLegLeft
+    400036: Armature|UpperLegRight
+    400038: maleBaseMesh
+    400040: //RootNode
+    4300000: maleBaseMesh
+    9500000: //RootNode
+    13700000: maleBaseMesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: Armature
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|upperLegLeft
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|UpperLegRight
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|LowerLegLeft
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|lowerLegRight
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|FootLeft
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|FootRight
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|hips
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|chest
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|shoulderLeft
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|ShoulderRight
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|upperArmLeft
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|upperArmRight
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|lowerArmLeft
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|lowerArmRight
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|handLeft
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Armature|handRight
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: polcon_heroe_movie_rigged_3(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Armature
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -.707106829, y: 0, z: -0, w: .707106709}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Armature|hips
+      position: {x: 5.07485728e-18, y: .0571378097, z: .824211419}
+      rotation: {x: .740922868, y: -7.42595603e-08, z: -8.19258617e-08, w: .671590149}
+      scale: {x: 1, y: .999999821, z: .999999821}
+      transformModified: 1
+    - name: Armature|chest
+      position: {x: 8.93253312e-16, y: .281994104, z: 1.11758709e-08}
+      rotation: {x: -.0556827299, y: 1.58933332e-07, z: 3.45039108e-09, w: .998448551}
+      scale: {x: 1, y: .999999821, z: .999999821}
+      transformModified: 1
+    - name: Armature|neck
+      position: {x: 5.12605811e-16, y: .285714447, z: 9.31322575e-10}
+      rotation: {x: .251320183, y: 4.9550426e-09, z: 2.57187232e-08, w: .967903972}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Armature|head
+      position: {x: 1.15460874e-14, y: .105649233, z: 3.72528994e-08}
+      rotation: {x: -.346595824, y: -1.49374486e-07, z: 1.78999837e-08, w: .938014567}
+      scale: {x: 1, y: .999999881, z: 1}
+      transformModified: 1
+    - name: Armature|ShoulderRight
+      position: {x: 5.12605811e-16, y: .285714447, z: 9.31322575e-10}
+      rotation: {x: .684627533, y: .464150876, z: .430844665, w: -.36086303}
+      scale: {x: .999999642, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: Armature|upperArmRight
+      position: {x: -4.84287739e-08, y: .162304908, z: 1.49011612e-08}
+      rotation: {x: .0424993336, y: -.538396657, z: -.136364579, w: .830498457}
+      scale: {x: 1.00000012, y: 1.00000012, z: .999999881}
+      transformModified: 1
+    - name: Armature|lowerArmRight
+      position: {x: 2.94729041e-09, y: .212392747, z: 1.11758709e-08}
+      rotation: {x: -.0357456617, y: -.14459677, z: -.0187330469, w: .988667369}
+      scale: {x: 1.00000012, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: Armature|handRight
+      position: {x: 2.14204174e-08, y: .223542511, z: 4.56483775e-08}
+      rotation: {x: -.0316503644, y: .996506631, z: .0642368421, w: -.0429706983}
+      scale: {x: .99999994, y: .999999821, z: 1}
+      transformModified: 1
+    - name: Armature|shoulderLeft
+      position: {x: 5.12605811e-16, y: .285714447, z: 9.31322575e-10}
+      rotation: {x: .684627473, y: -.464150757, z: -.430844545, w: -.360863298}
+      scale: {x: .999999464, y: .999999523, z: .999999881}
+      transformModified: 1
+    - name: Armature|upperArmLeft
+      position: {x: 3.7252903e-09, y: .162304997, z: 1.11758709e-08}
+      rotation: {x: .0424989723, y: .538396835, z: .136364713, w: .830498338}
+      scale: {x: .99999994, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: Armature|lowerArmLeft
+      position: {x: 4.62859475e-08, y: .212392911, z: 1.86264515e-09}
+      rotation: {x: -.0357450433, y: .144597143, z: .0187330507, w: .988667369}
+      scale: {x: 1, y: .999999702, z: .999999881}
+      transformModified: 1
+    - name: Armature|handLeft
+      position: {x: 1.95577741e-08, y: .223542511, z: -9.9911297e-09}
+      rotation: {x: .0316503532, y: .996506631, z: .0642370358, w: .0429708213}
+      scale: {x: .999999762, y: .999999762, z: .999999881}
+      transformModified: 1
+    - name: Armature|upperLegLeft
+      position: {x: -.0976784378, y: .0423826128, z: .775411606}
+      rotation: {x: -.702818751, y: .00944485143, z: .00901095755, w: .711249173}
+      scale: {x: 1.00000012, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: Armature|LowerLegLeft
+      position: {x: -4.72937245e-09, y: .319313169, z: -4.56930138e-09}
+      rotation: {x: .0270796176, y: -.706617236, z: -.0057679615, w: .707054198}
+      scale: {x: 1.00000012, y: 1, z: 1}
+      transformModified: 1
+    - name: Armature|FootLeft
+      position: {x: 4.30736691e-09, y: .424188972, z: 1.45405454e-09}
+      rotation: {x: -.503601134, y: .523779273, z: .473293602, w: .498030454}
+      scale: {x: 1.00000012, y: 1.00000048, z: 1.00000024}
+      transformModified: 1
+    - name: Armature|UpperLegRight
+      position: {x: .0976784378, y: .0423826128, z: .775411606}
+      rotation: {x: -.702811599, y: -.00889760721, z: -.00955171324, w: .711256266}
+      scale: {x: 1, y: 1, z: .999999881}
+      transformModified: 1
+    - name: Armature|lowerLegRight
+      position: {x: -1.77533366e-09, y: .319313109, z: -2.01544026e-09}
+      rotation: {x: .00587821985, y: -.705262065, z: -.0270559005, w: .708405852}
+      scale: {x: .999999821, y: .999999881, z: 1}
+      transformModified: 1
+    - name: Armature|FootRight
+      position: {x: -4.74392436e-09, y: .424188942, z: 1.97906047e-09}
+      rotation: {x: -.474956036, y: .496298343, z: .502035439, w: .525419056}
+      scale: {x: 1, y: 1.00000012, z: 1}
+      transformModified: 1
+    - name: maleBaseMesh
+      position: {x: 0, y: 0, z: 7.4505806e-09}
+      rotation: {x: -8.14603354e-08, y: 0, z: -0, w: 1}
+      scale: {x: .00999999978, y: .00999999978, z: .00999999978}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  additionalBone: 0
+  userData: 

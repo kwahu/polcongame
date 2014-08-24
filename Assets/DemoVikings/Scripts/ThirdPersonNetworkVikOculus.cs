@@ -12,30 +12,30 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
     {
         cameraScript = GetComponent<ThirdPersonCameraNETOculus>();
         controllerScript = GetComponent<ThirdPersonControllerNET>();
-
     }
     void Start()
     {
+<<<<<<< HEAD
+=======
 		var h = new Hashtable();
 		h.Add("coinsWithPlayer", CollectedCoins);
 
         //TODO: Bugfix to allow .isMine and .owner from AWAKE!
+>>>>>>> 4658fa44c732c288f5ce045cdcd0568e3d9c9cc8
         if (photonView.isMine)
         {
             //MINE: local player, simply enable the local scripts
             cameraScript.enabled = true;
             controllerScript.enabled = true;
-			GameObject obj = GameObject.FindGameObjectWithTag("oculus");
+			GameObject obj = GameObject.Find("PC camera");//FindGameObjectWithTag("oculus");
 			obj.transform.parent = transform;
-			obj.transform.localPosition = new Vector3(0, 2, -10);
-			obj.transform.localEulerAngles = new Vector3(10, 0, 0);
-
+			obj.transform.localPosition = new Vector3(0, 2, 0);
+			obj.transform.localEulerAngles = new Vector3(0, 0, 0);
         }
         else
         {           
             cameraScript.enabled = false;
             controllerScript.enabled = true;
-
         }
         controllerScript.SetIsRemotePlayer(!photonView.isMine);
 
@@ -96,8 +96,8 @@ public class ThirdPersonNetworkVikOculus : Photon.MonoBehaviour, ICoinCollector
 
         //disable the axe and shield meshrenderers based on the instantiate data
         MeshRenderer[] rens = GetComponentsInChildren<MeshRenderer>();
-        rens[0].enabled = mybools[0];//Axe
-        rens[1].enabled = mybools[1];//Shield
+//        rens[0].enabled = mybools[0];//Axe
+    //    rens[1].enabled = mybools[1];//Shield
     }
 
 	#region ICoinCollector implementation
