@@ -61,13 +61,16 @@ public class MainMenuVikOculus : MonoBehaviour
 		void JoinRoomAsOneOfHeroes ()
 		{
 				GUILayout.Label ("WYBIERZ BOHATERA", GUILayout.Width (150));
-				customSettings = PhotonNetwork.GetRoomList () [0].customProperties;
-				//display available heroes
-				foreach (string name in playerPrefabs)
-						if ((bool)customSettings [name] == false && GUILayout.Button (name)) {
-								selectedHero = name;
-								PhotonNetwork.JoinRoom (roomName);
-						}
+
+		if (PhotonNetwork.GetRoomList ().Length > 0) {
+						customSettings = PhotonNetwork.GetRoomList () [0].customProperties;
+						//display available heroes
+						foreach (string name in playerPrefabs)
+								if ((bool)customSettings [name] == false && GUILayout.Button (name)) {
+										selectedHero = name;
+										PhotonNetwork.JoinRoom (roomName);
+								}
+				}
 		}
 
 		void ShowConnectingGUI ()
