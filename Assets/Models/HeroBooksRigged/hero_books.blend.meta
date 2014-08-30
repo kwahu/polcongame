@@ -68,7 +68,79 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Default Take
+      takeName: Default Take
+      firstFrame: 0
+      lastFrame: 249
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/hips
+        weight: 1
+      - path: Armature/hips/chest
+        weight: 1
+      - path: Armature/hips/chest/neck
+        weight: 1
+      - path: Armature/hips/chest/neck/head
+        weight: 1
+      - path: Armature/hips/chest/shoulder_l
+        weight: 1
+      - path: Armature/hips/chest/shoulder_l/upperarm_l
+        weight: 1
+      - path: Armature/hips/chest/shoulder_l/upperarm_l/lowerarm_l
+        weight: 1
+      - path: Armature/hips/chest/shoulder_l/upperarm_l/lowerarm_l/hand_l
+        weight: 1
+      - path: Armature/hips/chest/shoulder_l/upperarm_l/lowerarm_l/lowerarm_l_001
+        weight: 0
+      - path: Armature/hips/chest/shoulder_r
+        weight: 1
+      - path: Armature/hips/chest/shoulder_r/uppararm_r
+        weight: 1
+      - path: Armature/hips/chest/shoulder_r/uppararm_r/lowerarm_r
+        weight: 1
+      - path: Armature/hips/chest/shoulder_r/uppararm_r/lowerarm_r/hand_r
+        weight: 1
+      - path: Armature/hips/chest/shoulder_r/uppararm_r/lowerarm_r/lowerarm_r_001
+        weight: 0
+      - path: Armature/upperleg_l
+        weight: 1
+      - path: Armature/upperleg_l/lowerleg_l
+        weight: 1
+      - path: Armature/upperleg_l/lowerleg_l/foot_l
+        weight: 1
+      - path: Armature/upperler_r
+        weight: 1
+      - path: Armature/upperler_r/lowerleg_r
+        weight: 1
+      - path: Armature/upperler_r/lowerleg_r/foot_r
+        weight: 1
+      - path: Hero_Literature
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
