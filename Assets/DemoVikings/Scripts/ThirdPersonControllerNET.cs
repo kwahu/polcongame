@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public delegate void JumpDelegate ();
+public delegate void __JumpDelegate__ ();
 
-public class ThirdPersonControllerNET : MonoBehaviour
+public class __ThirdPersonControllerNET__ : MonoBehaviour
 {
 	public Rigidbody target;
 		// The object we're steering
@@ -21,7 +21,7 @@ public class ThirdPersonControllerNET : MonoBehaviour
 			// Turn this off if the camera should be controllable even without cursor lock
 		controlLock = false;
 			// Turn this on if you want mouse lock controlled by this script
-	public JumpDelegate onJump = null;
+	public __JumpDelegate__ onJump = null;
 		// Assign to this delegate to respond to the controller jumping
 	
 	
