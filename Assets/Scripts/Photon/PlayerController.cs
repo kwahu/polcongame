@@ -108,12 +108,8 @@ public class PlayerController : MonoBehaviour
 
 		Quaternion q = Quaternion.identity;
 		OVRDevice.GetOrientation(0, ref q);
-		//OVRDevice.GetPredictedOrientation(1, ref q);
-
-		Debug.Log (q);
 		OVRDevice.GetOrientation(1, ref q);
-		Debug.Log (q);
-		target.transform.rotation = q; //q.eulerAngles.y;
+		target.transform.rotation = q; 
 		
 				if (Input.GetKeyDown (KeyCode.Backslash) || Input.GetKeyDown (KeyCode.Plus)) {
 						walking = !walking;

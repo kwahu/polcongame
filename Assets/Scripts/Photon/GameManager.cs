@@ -39,8 +39,11 @@ public class GameManager : Photon.MonoBehaviour
 				object[] objs = new object[1]; // Put our bool data in an object array, to send
 				//    objs[0] = enabledRenderers;
 
+				//find respawn point for this player name
+				GameObject respawn = GameObject.Find (this.playerPrefabName+"_spawn");
+
 				// Spawn our local player
-				PhotonNetwork.Instantiate (this.playerPrefabName, transform.position, Quaternion.identity, 0, objs);
+				PhotonNetwork.Instantiate (this.playerPrefabName, respawn.transform.position, Quaternion.identity, 0, objs);
 		}
 
 		void OnGUI ()
