@@ -101,9 +101,19 @@ public class PlayerController : MonoBehaviour
 						}
 			
 						rotationAmount = Input.GetAxis ("Horizontal") * turnSpeed * Time.deltaTime;
+
 				}
 		
 				target.transform.RotateAround (target.transform.up, rotationAmount);
+
+		Quaternion q = Quaternion.identity;
+		OVRDevice.GetOrientation(0, ref q);
+		//OVRDevice.GetPredictedOrientation(1, ref q);
+
+		Debug.Log (q);
+		OVRDevice.GetOrientation(1, ref q);
+		Debug.Log (q);
+		target.transform.rotation = q; //q.eulerAngles.y;
 		
 				if (Input.GetKeyDown (KeyCode.Backslash) || Input.GetKeyDown (KeyCode.Plus)) {
 						walking = !walking;

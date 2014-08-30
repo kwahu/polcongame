@@ -25,7 +25,7 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 						//MINE: local player, simply enable the local scripts
 					//	cameraScript.enabled = true;
 						controllerScript.enabled = true;
-						GameObject obj = GameObject.Find ("PC camera");//FindGameObjectWithTag("oculus");
+						GameObject obj = GameObject.FindGameObjectWithTag("oculus");//GameObject.Find ("CAME");//FindGameObjectWithTag("oculus");
 						obj.transform.parent = transform;
 						obj.transform.localPosition = new Vector3 (0, 1.5f, 0);
 						obj.transform.localEulerAngles = new Vector3 (0, 0, 0);
