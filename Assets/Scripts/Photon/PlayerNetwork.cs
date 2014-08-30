@@ -8,6 +8,8 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 		PlayerController controllerScript;
 		private bool appliedInitialUpdate;
 
+	static public GameObject camera;
+
 		void Awake ()
 		{
 		cameraScript = GetComponent<PlayerCamera> ();
@@ -25,10 +27,10 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 						//MINE: local player, simply enable the local scripts
 					//	cameraScript.enabled = true;
 						controllerScript.enabled = true;
-						GameObject obj = GameObject.FindGameObjectWithTag("oculus");//GameObject.Find ("CAME");//FindGameObjectWithTag("oculus");
-						obj.transform.parent = transform;
-						obj.transform.localPosition = new Vector3 (0, 1.5f, 0);
-						obj.transform.localEulerAngles = new Vector3 (0, 0, 0);
+						//GameObject obj = GameObject.FindGameObjectWithTag("oculus");//GameObject.Find ("CAME");//FindGameObjectWithTag("oculus");
+						camera.transform.parent = transform;
+						camera.transform.localPosition = new Vector3 (0, 1.5f, 0);
+						camera.transform.localEulerAngles = new Vector3 (0, 0, 0);
 				} else {           
 					//	cameraScript.enabled = false;
 						controllerScript.enabled = false;

@@ -8,6 +8,9 @@ public class MainMenu : MonoBehaviour
 		public PhotonHashtable customSettings;
 		public static string[] playerPrefabs = {"game","film","theater","books"};
 		public static string selectedHero = null;
+
+	public GameObject camera_pc;
+	public GameObject camera_oculus;
 	
 		void Awake ()
 		{
@@ -52,15 +55,21 @@ public class MainMenu : MonoBehaviour
 
 		void CreateRoomAsSpectator ()
 		{
+		PlayerNetwork.camera = camera_pc;
+
 				GUILayout.Label ("CREATE ROOM", GUILayout.Width (150));
 				if (GUILayout.Button ("GO")) {
-						PhotonNetwork.CreateRoom (roomName, true, true, 10, InitRoomSettings (), null);		
+						PhotonNetwork.CreateRoom (roomName, true, true, 10, InitRoomSettings (), null);	
 				}
 		}
 
 		void JoinRoomAsOneOfHeroes ()
 		{
 				GUILayout.Label ("WYBIERZ BOHATERA", GUILayout.Width (150));
+
+		camera_pc.SetActive (false);
+		camera_oculus.SetActive (true);
+		PlayerNetwork.camera = camera_oculus;
 
 		if (PhotonNetwork.GetRoomList ().Length > 0) {
 						customSettings = PhotonNetwork.GetRoomList () [0].customProperties;
