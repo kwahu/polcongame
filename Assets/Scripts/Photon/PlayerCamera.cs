@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 
-public class ThirdPersonCameraNETOculus : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
 	public Collider target;
 	// The object we're looking at

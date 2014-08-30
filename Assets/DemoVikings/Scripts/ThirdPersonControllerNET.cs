@@ -3,7 +3,7 @@ using System.Collections;
 
 public delegate void __JumpDelegate__ ();
 
-public class __ThirdPersonControllerNET__ : MonoBehaviour
+public class ThirdPersonControllerNET : MonoBehaviour
 {
 	public Rigidbody target;
 		// The object we're steering

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
-public class MainMenuVikOculus : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
 		private string roomName = "polcon";
 		public PhotonHashtable customSettings;

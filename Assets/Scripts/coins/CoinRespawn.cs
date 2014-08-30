@@ -30,7 +30,7 @@ public class CoinRespawn : Photon.MonoBehaviour {
 	{
 		if ( respawned )
 		{
-			var coinCollector = other.gameObject.GetComponent<ThirdPersonNetworkVikOculus>();
+			var coinCollector = other.gameObject.GetComponent<PlayerNetwork>();
 
 			if ( coinCollector != null )
 			{

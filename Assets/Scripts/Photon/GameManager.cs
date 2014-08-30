@@ -2,21 +2,21 @@ using UnityEngine;
 using System.Collections;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
-public class GameManagerVikOculus : Photon.MonoBehaviour
+public class GameManager : Photon.MonoBehaviour
 {
 		string playerPrefabName = "Overseer"; //a default spectator
 
 		void OnJoinedRoom ()
 		{
-				SetHeroStatus (MainMenuVikOculus.selectedHero, true);
-				if (MainMenuVikOculus.selectedHero != null)
-						playerPrefabName = MainMenuVikOculus.selectedHero;
+				SetHeroStatus (MainMenu.selectedHero, true);
+				if (MainMenu.selectedHero != null)
+						playerPrefabName = MainMenu.selectedHero;
 				StartGame ();
 		}
 
 		void SetHeroStatus (string name, bool state)
 		{
-				if (!MainMenuVikOculus.isHero ()) 
+				if (!MainMenu.isHero ()) 
 						return;
 
 				PhotonHashtable customSettings = PhotonNetwork.room.customProperties;
@@ -49,11 +49,11 @@ public class GameManagerVikOculus : Photon.MonoBehaviour
 						return; //Only display this GUI when inside a room
 
 				if (GUILayout.Button ("Leave Room")) {
-						SetHeroStatus (MainMenuVikOculus.selectedHero, false);
+						SetHeroStatus (MainMenu.selectedHero, false);
 						PhotonNetwork.LeaveRoom ();
 				}
 
-		if(!MainMenuVikOculus.isHero () )
+		if(!MainMenu.isHero () )
 				ManualReleasingPlayers ();
 
 		}
@@ -62,7 +62,7 @@ public class GameManagerVikOculus : Photon.MonoBehaviour
 		{
 				PhotonHashtable customSettings = PhotonNetwork.room.customProperties;
 	
-		foreach (string name in MainMenuVikOculus.playerPrefabs)
+		foreach (string name in MainMenu.playerPrefabs)
 						if (GUILayout.Button (name + " " + customSettings [name])) {
 								customSettings [name] = !(bool)customSettings [name];
 								PhotonNetwork.room.SetCustomProperties (customSettings);
@@ -76,6 +76,6 @@ public class GameManagerVikOculus : Photon.MonoBehaviour
 
 		void OnApplicationQuit ()
 		{
-				SetHeroStatus (MainMenuVikOculus.selectedHero, false);
+				SetHeroStatus (MainMenu.selectedHero, false);
 		}
 }

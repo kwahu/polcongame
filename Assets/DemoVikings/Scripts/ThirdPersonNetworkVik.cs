@@ -5,13 +5,13 @@ using System.Collections;
 public class ThirdPersonNetworkVik : Photon.MonoBehaviour
 {
     ThirdPersonCameraNET cameraScript;
-    __ThirdPersonControllerNET__ controllerScript;
+    ThirdPersonControllerNET controllerScript;
     private bool appliedInitialUpdate;
 
     void Awake()
     {
         cameraScript = GetComponent<ThirdPersonCameraNET>();
-        controllerScript = GetComponent<__ThirdPersonControllerNET__>();
+        controllerScript = GetComponent<ThirdPersonControllerNET>();
 
     }
     void Start()
