@@ -24,6 +24,15 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 
 				//TODO: Bugfix to allow .isMine and .owner from AWAKE!
 				if (photonView.isMine) {
+
+					Renderer child_renderer;
+					foreach (Transform child in GetComponentsInChildren<Transform>()) {
+						child_renderer = child.GetComponent<Renderer>();
+						if(child_renderer){
+							child_renderer.enabled = false;		
+						}
+						
+					}
 						//MINE: local player, simply enable the local scripts
 					//	cameraScript.enabled = true;
 						controllerScript.enabled = true;
