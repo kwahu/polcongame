@@ -230,4 +230,10 @@ public class PlayerController : MonoBehaviour
 				Gizmos.DrawLine (target.transform.position + target.transform.up * -groundedCheckOffset,
 			target.transform.position + target.transform.up * -(groundedCheckOffset + groundedDistance));
 		}
+
+	void OnCollisionEnter(Collision col)
+	{
+		Debug.Log ("kolizja!");
+
+	}
 }
