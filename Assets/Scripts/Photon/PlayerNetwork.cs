@@ -21,12 +21,12 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 		void Start ()
 		{
 
-				var h = new Hashtable ();
-				h.Add ("coinsWithPlayer", CollectedCoins);
+				//var h = new Hashtable ();
+				//h.Add ("coinsWithPlayer", CollectedCoins);
 
 				//TODO: Bugfix to allow .isMine and .owner from AWAKE!
 				if (photonView.isMine) {
-
+					this.GetComponent<PlayerHud>().enabled = true;
 					Renderer child_renderer;
 					foreach (Transform child in GetComponentsInChildren<Transform>()) {
 						child_renderer = child.GetComponent<Renderer>();
@@ -38,7 +38,7 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 						//MINE: local player, simply enable the local scripts
 					//	cameraScript.enabled = true;
 						controllerScript.enabled = true;
-			thrower.enabled = true;
+						thrower.enabled = true;
 						//GameObject obj = GameObject.FindGameObjectWithTag("oculus");//GameObject.Find ("CAME");//FindGameObjectWithTag("oculus");
 						camera.transform.parent = transform;
 						camera.transform.localPosition = new Vector3 (0, 1.5f, 0);
@@ -141,6 +141,12 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 
 		int coinsInChest = 0;
 
+		public int CoinsInChest {
+		get {
+			return coinsInChest;
+		}
+	}
+
 		public void MoveCoinsToChest ()
 		{
 				coinsInChest += TakeCoins ();
@@ -150,15 +156,17 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 
 		void UpdatePlayerCoinsInfo ()
 		{
-		var customSettings = new ExitGames.Client.Photon.Hashtable ();
+	/*	var customSettings = new ExitGames.Client.Photon.Hashtable ();
 
 //				h.Add ("coinsWithPlayer", CollectedCoins);
 			//	h.Add ("coinsInChest", coinsInChest);
-
+		Debug.Log (PhotonNetwork.room.customProperties);
+		Debug.Log ("giving " + CollectedCoins + " to " +  PhotonNetwork.playerName);
 		customSettings = PhotonNetwork.room.customProperties;
 		customSettings [PhotonNetwork.playerName+"_coins"] = CollectedCoins;
 		customSettings [PhotonNetwork.playerName+"_coinsInChest"] = coinsInChest;
 		PhotonNetwork.room.SetCustomProperties (customSettings);
+		Debug.Log (PhotonNetwork.room.customProperties);
 				//h.Add ("test", "halo");
 
 	//	Debug.Log ("UPDATE PLAYER" + Time.time + " " + coinsInChest);
@@ -166,6 +174,6 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 		//PhotonNetwork.
 			//player.SetCustomProperties (h);
 //				photonView.owner.SetCustomProperties (h);
-
+*/
 		}
 }
