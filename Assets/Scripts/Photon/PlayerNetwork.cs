@@ -9,6 +9,8 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 	CoconuThrower thrower;
 		private bool appliedInitialUpdate;
 
+	int coinsToWIn = 50;
+
 	static public GameObject camera;
 
 		void Awake ()
@@ -156,6 +158,9 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 
 		void UpdatePlayerCoinsInfo ()
 		{
+		if (coinsInChest >= coinsToWIn) {
+			this.gameObject.layer = LayerMask.NameToLayer("Easter");
+				}
 	/*	var customSettings = new ExitGames.Client.Photon.Hashtable ();
 
 //				h.Add ("coinsWithPlayer", CollectedCoins);
