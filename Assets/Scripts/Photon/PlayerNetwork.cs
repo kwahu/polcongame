@@ -146,16 +146,22 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 
 		void UpdatePlayerCoinsInfo ()
 		{
-				var h = new ExitGames.Client.Photon.Hashtable ();
+		var customSettings = new ExitGames.Client.Photon.Hashtable ();
 
-				h.Add ("coinsWithPlayer", CollectedCoins);
-				h.Add ("coinsInChest", coinsInChest);
+//				h.Add ("coinsWithPlayer", CollectedCoins);
+			//	h.Add ("coinsInChest", coinsInChest);
+
+		customSettings = PhotonNetwork.room.customProperties;
+		customSettings [PhotonNetwork.playerName+"_coins"] = CollectedCoins;
+		customSettings [PhotonNetwork.playerName+"_coinsInChest"] = coinsInChest;
+		PhotonNetwork.room.SetCustomProperties (customSettings);
 				//h.Add ("test", "halo");
 
 	//	Debug.Log ("UPDATE PLAYER" + Time.time + " " + coinsInChest);
 
 		//PhotonNetwork.
 			//player.SetCustomProperties (h);
-				photonView.owner.SetCustomProperties (h);
+//				photonView.owner.SetCustomProperties (h);
+
 		}
 }

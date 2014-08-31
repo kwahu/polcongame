@@ -14,9 +14,14 @@ public class StatsHud : Photon.MonoBehaviour
 		{
 				PhotonPlayer[] players = PhotonNetwork.playerList;
 
+		var customSettings = new ExitGames.Client.Photon.Hashtable ();
+		
+		customSettings = PhotonNetwork.room.customProperties;
+
 				string playerData = "";
 				foreach (var player in players) {
-						playerData += "\n" + player.name + " | " + player.customProperties ["coinsWithPlayer"] + " | " + player.customProperties ["coinsInChest"];
+						//playerData += "\n" + player.name + " | " + player.customProperties [PhotonNetwork.playerName+"_coins"] + " | " + player.customProperties ["coinsInChest"];
+			playerData += "\n" + player.name + " | " + customSettings [player.name+"_coins"] + " | " + customSettings [player.name+"_coinsInChest"];
 				}
 
 				return "Player | Coins | Chest Coins " + playerData;
