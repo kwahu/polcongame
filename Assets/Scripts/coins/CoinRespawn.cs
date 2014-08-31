@@ -84,7 +84,10 @@ public class CoinRespawn : Photon.MonoBehaviour {
 	void Visibility(bool visible)
 	{
 		Visible = visible;
-		renderer.enabled = visible;
+		renderer.enabled = false;
+		foreach (Transform child in GetComponentsInChildren<Transform>()) {
+			child.renderer.enabled = visible;
+		}
 	}
 
 	#region Proton part
