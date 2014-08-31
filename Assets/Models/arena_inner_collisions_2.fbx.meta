@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 83541271c72274b859f2b33e804abb42
+guid: c96dd57bcbcba444d9fdacb9fdd6b671
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,7 +7,8 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder.002
+    4300000: Cylinder_002
+    7400000: Default Take
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -46,7 +47,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
@@ -60,6 +61,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   additionalBone: 0
   userData: 
