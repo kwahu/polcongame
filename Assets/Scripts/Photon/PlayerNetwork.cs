@@ -6,6 +6,7 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 {
 		PlayerCamera cameraScript;
 		PlayerController controllerScript;
+	CoconuThrower thrower;
 		private bool appliedInitialUpdate;
 
 	static public GameObject camera;
@@ -14,6 +15,7 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 		{
 		cameraScript = GetComponent<PlayerCamera> ();
 		controllerScript = GetComponent<PlayerController> ();
+		thrower = GetComponent<CoconuThrower> ();
 		}
 
 		void Start ()
@@ -36,6 +38,7 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 						//MINE: local player, simply enable the local scripts
 					//	cameraScript.enabled = true;
 						controllerScript.enabled = true;
+			thrower.enabled = true;
 						//GameObject obj = GameObject.FindGameObjectWithTag("oculus");//GameObject.Find ("CAME");//FindGameObjectWithTag("oculus");
 						camera.transform.parent = transform;
 						camera.transform.localPosition = new Vector3 (0, 1.5f, 0);
@@ -43,6 +46,7 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 				} else {           
 					//	cameraScript.enabled = false;
 						controllerScript.enabled = false;
+			thrower.enabled = false;
 				}
 				controllerScript.SetIsRemotePlayer (!photonView.isMine);
 

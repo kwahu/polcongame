@@ -144,8 +144,9 @@ public class PlayerController : MonoBehaviour
 				
 								return Mathf.Abs (sidestep) > Mathf.Abs (horizontal) ? sidestep : horizontal;
 						} else {
-								float sidestep = -(Input.GetKey (KeyCode.Q) ? 1 : 0) + (Input.GetKey (KeyCode.E) ? 1 : 0);
-								return sidestep;
+								//float sidestep = -(Input.GetKey (KeyCode.Q) ? 1 : 0) + (Input.GetKey (KeyCode.E) ? 1 : 0);
+				float sidestep = Input.GetAxis ("Horizontal");
+				return sidestep;
 						}
 				}
 		}
@@ -189,6 +190,7 @@ public class PlayerController : MonoBehaviour
 						//target.drag = 0.0f;
 						// If we're airborne, we should have no drag
 				}
+
 
 				// Only allow movement controls if we did not just jump
 				Vector3 movement = Input.GetAxis ("Vertical") * target.transform.forward +SidestepAxisInput * target.transform.right;
