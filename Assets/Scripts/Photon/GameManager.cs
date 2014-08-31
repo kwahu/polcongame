@@ -95,7 +95,7 @@ public class GameManager : Photon.MonoBehaviour
 				if (!MainMenu.isHero ())
 						ManualReleasingPlayers ();
 
-		Debug.Log (PhotonNetwork.room.customProperties);
+		//Debug.Log (PhotonNetwork.room.customProperties);
 		}
 
 		void ManualReleasingPlayers ()

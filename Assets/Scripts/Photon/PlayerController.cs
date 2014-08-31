@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 		public Rigidbody target;
 		public Collider collider;
 		// The object we're steering
-		public float speed = 1.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 0.3f, jumpSpeed = 1.0f;
+		 float speed = 4.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 1f, jumpSpeed = 4.0f;
 		// Tweak to ajust character responsiveness
 		public LayerMask groundLayers = -1;
 		// Which layers should be walkable?
@@ -25,13 +25,13 @@ public class PlayerController : MonoBehaviour
 		// Assign to this delegate to respond to the controller jumping
 	
 	
-		private const float inputThreshold = 0.01f,
-				groundDrag = 5.0f,
-				directionalJumpFactor = 0.7f;
+		private const float inputThreshold = 0.01f,directionalJumpFactor = 0.7f;
+
+	 float groundDrag = 20.0f;
 		// Tweak these to adjust behaviour relative to speed
-		public float groundedCheckOffset = 0.0f;
+		 float groundedCheckOffset = -0.1f;
 		// Tweak so check starts from just within target footing
-		private const float groundedDistance = 0.8f;
+		private const float groundedDistance = 0.25f;
 		// Tweak if character lands too soon or gets stuck "in air" often
 		
 	
@@ -154,7 +154,6 @@ public class PlayerController : MonoBehaviour
 	// Handle movement here since physics will only be calculated in fixed frames anyway
 		{
 
-				//grounded = true;
    
 				grounded = Physics.Raycast (
 			collider.transform.position + collider.transform.up * -groundedCheckOffset,
@@ -167,13 +166,16 @@ public class PlayerController : MonoBehaviour
 				if (isRemotePlayer)
 						return;
 
-
-				target.drag = groundDrag;
+		target.drag = 0;
+				
 
 				if (grounded) {
+			target.drag = groundDrag;
 						if (Input.GetButton ("Jump")) {
+
 								// Handle jumping
-								target.AddForce (jumpSpeed * target.transform.up + target.velocity.normalized * directionalJumpFactor, ForceMode.VelocityChange);
+								
+				target.AddForce (jumpSpeed * target.transform.up + target.velocity.normalized * directionalJumpFactor, ForceMode.VelocityChange);
 								// When jumping, we set the velocity upward with our jump speed
 								// plus some application of directional movement
 				
@@ -189,8 +191,7 @@ public class PlayerController : MonoBehaviour
 				}
 
 				// Only allow movement controls if we did not just jump
-				Vector3 movement = Input.GetAxis ("Vertical") * target.transform.forward +
-						SidestepAxisInput * target.transform.right;
+				Vector3 movement = Input.GetAxis ("Vertical") * target.transform.forward +SidestepAxisInput * target.transform.right;
 		
 				float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
 				// Scale down applied speed if in walk mode
@@ -202,7 +203,12 @@ public class PlayerController : MonoBehaviour
 		
 				if (movement.magnitude > inputThreshold) {
 						// Only apply movement if we have sufficient input
-						target.AddForce (movement.normalized * appliedSpeed, ForceMode.VelocityChange);
+
+			if(grounded)
+					target.AddForce (movement.normalized * appliedSpeed, ForceMode.VelocityChange);//VelocityChange
+			//else
+			//	target.AddForce (movement.normalized * appliedSpeed/15, ForceMode.VelocityChange);//VelocityChange
+
 				} else {
 						// If we are grounded and don't have significant input, just stop horizontal movement
 						target.velocity = new Vector3 (0.0f, target.velocity.y, 0.0f);
