@@ -115,7 +115,7 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 		{
 				int coins = CollectedCoins;
 
-				UpdatePlayerCoinsInfo ();
+				//UpdatePlayerCoinsInfo ();
 
 				CollectedCoins = 0;
 
@@ -149,8 +149,13 @@ public class PlayerNetwork : Photon.MonoBehaviour, ICoinCollector
 				var h = new ExitGames.Client.Photon.Hashtable ();
 
 				h.Add ("coinsWithPlayer", CollectedCoins);
-				h.Add ("coinsWithPlayerInChest", coinsInChest);
+				h.Add ("coinsInChest", coinsInChest);
+				//h.Add ("test", "halo");
 
+	//	Debug.Log ("UPDATE PLAYER" + Time.time + " " + coinsInChest);
+
+		//PhotonNetwork.
+			//player.SetCustomProperties (h);
 				photonView.owner.SetCustomProperties (h);
 		}
 }
