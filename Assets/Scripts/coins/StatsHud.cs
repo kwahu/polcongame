@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class StatsHud : Photon.MonoBehaviour {
 
+	float part;
+	float height;
+
+	public float left = 0.2f;
+	public float right = 0.615f;
 
 	string printStats()
 	{
@@ -19,11 +24,30 @@ public class StatsHud : Photon.MonoBehaviour {
 
 	void OnGUI ()
 	{
-		GUILayout.BeginArea (new Rect (0.0f, 0.0f, Screen.width, Screen.height));
-			GUILayout.BeginHorizontal ();
-				GUILayout.FlexibleSpace ();
-				GUILayout.Box (printStats());
-			GUILayout.EndHorizontal();
-		GUILayout.EndArea ();
+		part = Screen.width / 6;
+		height = Screen.height / 6;
+
+		if (GameManager.isOculus ()) {
+						GUILayout.BeginArea (new Rect (Screen.width * left, height * 3, part, height));
+						Draw ();
+						GUILayout.EndArea ();
+
+						GUILayout.BeginArea (new Rect (Screen.width * right, height * 3, part, height));
+						Draw ();
+						GUILayout.EndArea ();
+				} else {
+						GUILayout.BeginArea (new Rect (Screen.width /2.3f, Screen.height /1.5f, part, height));
+						Draw ();
+						GUILayout.EndArea ();
+				}
 	}
+
+	void Draw()
+	{
+				//GUILayout.BeginHorizontal ();
+				//GUILayout.FlexibleSpace ();
+				GUILayout.Box (printStats ());
+				//GUILayout.FlexibleSpace();
+				//GUILayout.EndHorizontal ();
+		}
 }
