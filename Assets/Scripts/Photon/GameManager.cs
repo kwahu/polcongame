@@ -14,12 +14,17 @@ public class GameManager : Photon.MonoBehaviour
 				SetHeroStatus (MainMenu.selectedHero, true);
 				SetupCamera ();
 				StartGame ();
+
+
+				PhotonNetwork.playerName = PlayerPrefs.GetString ("playerName", this.playerPrefabName + Random.Range (1, 9999));
 		}
 
 		void SetupCamera ()
 		{
-				camera_oculus.SetActive (true);
+				//turn on for a minute to let it initialize so that we can check if the oculus is connected
+				
 				if (MainMenu.isHero ()) {
+						camera_oculus.SetActive (true); 
 						playerPrefabName = MainMenu.selectedHero;
 
 						if (isOculus ()) {
@@ -32,13 +37,13 @@ public class GameManager : Photon.MonoBehaviour
 						}
 				} else {
 						PlayerNetwork.camera = camera_pc;
-						camera_oculus.SetActive (false);
 				}
 		}
 
 		public static bool isOculus ()
 		{
-		if (OVRDevice.IsSensorPresent(0)) 
+
+		if (OVRDevice.IsSensorPresent (0)) 
 						return true;
 				else
 						return false;
@@ -72,7 +77,7 @@ public class GameManager : Photon.MonoBehaviour
 				//find respawn point for this player name
 				GameObject respawn = GameObject.Find (this.playerPrefabName + "_spawn");
 
-		Debug.Log (this.playerPrefabName + "_spawn = " + respawn);
+			//	Debug.Log (this.playerPrefabName + "_spawn = " + respawn);
 				// Spawn our local player
 				PhotonNetwork.Instantiate (this.playerPrefabName, respawn.transform.position, Quaternion.identity, 0, objs);
 		}

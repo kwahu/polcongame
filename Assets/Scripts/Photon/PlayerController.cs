@@ -6,6 +6,7 @@ public delegate void JumpDelegate ();
 public class PlayerController : MonoBehaviour
 {
 		public Rigidbody target;
+		public Collider collider;
 		// The object we're steering
 		public float speed = 1.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 0.3f, jumpSpeed = 1.0f;
 		// Tweak to ajust character responsiveness
@@ -28,9 +29,9 @@ public class PlayerController : MonoBehaviour
 				groundDrag = 5.0f,
 				directionalJumpFactor = 0.7f;
 		// Tweak these to adjust behaviour relative to speed
-	public float groundedCheckOffset = 0.0f;
-	// Tweak so check starts from just within target footing
-		private const float groundedDistance = 0.3f;
+		public float groundedCheckOffset = 0.0f;
+		// Tweak so check starts from just within target footing
+		private const float groundedDistance = 0.8f;
 		// Tweak if character lands too soon or gets stuck "in air" often
 		
 	
@@ -61,8 +62,11 @@ public class PlayerController : MonoBehaviour
 				if (target == null) {
 						target = GetComponent<Rigidbody> ();
 				}
+				if (collider == null) {
+						collider = GetComponent<Collider> ();
+				}
 		}
-		
+	
 		void Start ()
 	// Verify setup, configure rigidbody
 		{
@@ -86,14 +90,24 @@ public class PlayerController : MonoBehaviour
 				if (isRemotePlayer)
 						return;
 
+				if (GameManager.isOculus ())
+						ApplyOculusRotation ();
+				else
+						StandardRotation ();
+
+				Walking ();
+			
+		}
+
+		void StandardRotation ()
+		{
 				float rotationAmount;
-		
 				if (Input.GetMouseButton (1) && (!requireLock || controlLock || Screen.lockCursor)) {
 						// If the right mouse button is held, rotation is locked to the mouse
 						if (controlLock) {
 								Screen.lockCursor = true;
 						}
-			
+		
 						rotationAmount = Input.GetAxis ("Mouse X") * mouseTurnSpeed * Time.deltaTime;
 				} else {
 						if (controlLock) {
@@ -101,22 +115,24 @@ public class PlayerController : MonoBehaviour
 						}
 			
 						rotationAmount = Input.GetAxis ("Horizontal") * turnSpeed * Time.deltaTime;
-
 				}
-		
 				target.transform.RotateAround (target.transform.up, rotationAmount);
+		}
 
-
-		if (GameManager.isOculus ()) {
-						Quaternion q = Quaternion.identity;
-						//OVRDevice.GetOrientation(0, ref q);
-						OVRDevice.GetOrientation (1, ref q);
-						target.transform.rotation = q; 
-				}
-		
+		void Walking ()
+		{
 				if (Input.GetKeyDown (KeyCode.Backslash) || Input.GetKeyDown (KeyCode.Plus)) {
 						walking = !walking;
 				}
+		}
+		//apply oculus Y rotation to the character
+		void ApplyOculusRotation ()
+		{
+				Quaternion q = Quaternion.identity;
+				OVRDevice.GetOrientation (0, ref q);
+				Vector3 eulerAngles = target.transform.rotation.eulerAngles;
+				eulerAngles.y = q.eulerAngles.y;
+				transform.rotation = Quaternion.Euler (eulerAngles);
 		}
 	
 		float SidestepAxisInput {
@@ -137,10 +153,12 @@ public class PlayerController : MonoBehaviour
 		void FixedUpdate ()
 	// Handle movement here since physics will only be calculated in fixed frames anyway
 		{
+
+				//grounded = true;
    
 				grounded = Physics.Raycast (
-			target.transform.position + target.transform.up * -groundedCheckOffset,
-			target.transform.up * -1,
+			collider.transform.position + collider.transform.up * -groundedCheckOffset,
+			collider.transform.up * -1,
 			groundedDistance,
 			groundLayers
 				);
@@ -149,13 +167,13 @@ public class PlayerController : MonoBehaviour
 				if (isRemotePlayer)
 						return;
 
+
+				target.drag = groundDrag;
+
 				if (grounded) {
-						target.drag = groundDrag;
-						// Apply drag when we're grounded
-			
 						if (Input.GetButton ("Jump")) {
 								// Handle jumping
-								target.AddForce (jumpSpeed * target.transform.up +target.velocity.normalized * directionalJumpFactor,ForceMode.VelocityChange);
+								target.AddForce (jumpSpeed * target.transform.up + target.velocity.normalized * directionalJumpFactor, ForceMode.VelocityChange);
 								// When jumping, we set the velocity upward with our jump speed
 								// plus some application of directional movement
 				
@@ -164,35 +182,37 @@ public class PlayerController : MonoBehaviour
 								}
 						} else {
 
-								// Only allow movement controls if we did not just jump
-								Vector3 movement = Input.GetAxis ("Vertical") * target.transform.forward +
-										SidestepAxisInput * target.transform.right;
-				
-								float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
-								// Scale down applied speed if in walk mode
-				
-								if (Input.GetAxis ("Vertical") < 0.0f) {
-										// Scale down applied speed if walking backwards
-										appliedSpeed /= walkSpeedDownscale;
-								}
-
-								if (movement.magnitude > inputThreshold) {
-										// Only apply movement if we have sufficient input
-										target.AddForce (movement.normalized * appliedSpeed, ForceMode.VelocityChange);
-								} else {
-										// If we are grounded and don't have significant input, just stop horizontal movement
-										target.velocity = new Vector3 (0.0f, target.velocity.y, 0.0f);
-										return;
-								}
 						}
 				} else {
-						target.drag = 0.0f;
+						//target.drag = 0.0f;
 						// If we're airborne, we should have no drag
 				}
+
+				// Only allow movement controls if we did not just jump
+				Vector3 movement = Input.GetAxis ("Vertical") * target.transform.forward +
+						SidestepAxisInput * target.transform.right;
+		
+				float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
+				// Scale down applied speed if in walk mode
+		
+				if (Input.GetAxis ("Vertical") < 0.0f) {
+						// Scale down applied speed if walking backwards
+						appliedSpeed /= walkSpeedDownscale;
+				}
+		
+				if (movement.magnitude > inputThreshold) {
+						// Only apply movement if we have sufficient input
+						target.AddForce (movement.normalized * appliedSpeed, ForceMode.VelocityChange);
+				} else {
+						// If we are grounded and don't have significant input, just stop horizontal movement
+						target.velocity = new Vector3 (0.0f, target.velocity.y, 0.0f);
+						//	return;
+				}
+
 		}
 	
 		void OnDrawGizmos ()
-	// Use gizmos to gain information about the state of your setup
+		// Use gizmos to gain information about the state of your setup
 		{
 				if (!showGizmos || target == null) {
 						return;
