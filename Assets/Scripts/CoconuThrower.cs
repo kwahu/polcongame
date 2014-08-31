@@ -25,9 +25,11 @@ public class CoconuThrower : MonoBehaviour
 		{
 				if (Input.GetButtonDown ("Fire1") && alreadyShot == false) {
 						audio.PlayOneShot (throwSound);
-						Rigidbody newCoconut = Instantiate (coconutPrefab, transform.position, transform.rotation) as Rigidbody;
+
+
+						Rigidbody newCoconut = Instantiate (coconutPrefab, transform.position, Camera.main.transform.rotation) as Rigidbody;
 						newCoconut.name = "coconut";
-						newCoconut.velocity = transform.forward * throwSpeed;
+						newCoconut.velocity = Camera.main.transform.forward * throwSpeed;
 						Physics.IgnoreCollision (transform.root.collider, newCoconut.collider, true);
 						lineDrawer.Origin = newCoconut.gameObject;
 						lineDrawer.Destination = gameObject;
