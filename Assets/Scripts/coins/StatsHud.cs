@@ -25,7 +25,7 @@ public class StatsHud : Photon.MonoBehaviour {
 	void OnGUI ()
 	{
 		part = Screen.width / 6;
-		height = Screen.height / 6;
+		height = Screen.height / 5.5f;
 
 		if (GameManager.isOculus ()) {
 						GUILayout.BeginArea (new Rect (Screen.width * left, height * 3, part, height));
