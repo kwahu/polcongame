@@ -6,12 +6,42 @@ public class GameManager : Photon.MonoBehaviour
 {
 		string playerPrefabName = "Overseer"; //a default spectator
 
+		public GameObject camera_pc;
+		public GameObject camera_oculus;
+
 		void OnJoinedRoom ()
 		{
 				SetHeroStatus (MainMenu.selectedHero, true);
-				if (MainMenu.selectedHero != null)
-						playerPrefabName = MainMenu.selectedHero;
+				SetupCamera ();
 				StartGame ();
+		}
+
+		void SetupCamera ()
+		{
+				camera_oculus.SetActive (true);
+				if (MainMenu.isHero ()) {
+						playerPrefabName = MainMenu.selectedHero;
+
+						if (isOculus ()) {
+								PlayerNetwork.camera = camera_oculus;
+								camera_pc.SetActive (false);
+					
+						} else {
+								PlayerNetwork.camera = camera_pc;
+								camera_oculus.SetActive (false);
+						}
+				} else {
+						PlayerNetwork.camera = camera_pc;
+						camera_oculus.SetActive (false);
+				}
+		}
+
+		public static bool isOculus ()
+		{
+		if (OVRDevice.IsSensorPresent(0)) 
+						return true;
+				else
+						return false;
 		}
 
 		void SetHeroStatus (string name, bool state)
@@ -40,8 +70,9 @@ public class GameManager : Photon.MonoBehaviour
 				//    objs[0] = enabledRenderers;
 
 				//find respawn point for this player name
-				GameObject respawn = GameObject.Find (this.playerPrefabName+"_spawn");
+				GameObject respawn = GameObject.Find (this.playerPrefabName + "_spawn");
 
+		Debug.Log (this.playerPrefabName + "_spawn = " + respawn);
 				// Spawn our local player
 				PhotonNetwork.Instantiate (this.playerPrefabName, respawn.transform.position, Quaternion.identity, 0, objs);
 		}
@@ -56,8 +87,8 @@ public class GameManager : Photon.MonoBehaviour
 						PhotonNetwork.LeaveRoom ();
 				}
 
-		if(!MainMenu.isHero () )
-				ManualReleasingPlayers ();
+				if (!MainMenu.isHero ())
+						ManualReleasingPlayers ();
 
 		}
 
@@ -65,7 +96,7 @@ public class GameManager : Photon.MonoBehaviour
 		{
 				PhotonHashtable customSettings = PhotonNetwork.room.customProperties;
 	
-		foreach (string name in MainMenu.playerPrefabs)
+				foreach (string name in MainMenu.playerPrefabs)
 						if (GUILayout.Button (name + " " + customSettings [name])) {
 								customSettings [name] = !(bool)customSettings [name];
 								PhotonNetwork.room.SetCustomProperties (customSettings);

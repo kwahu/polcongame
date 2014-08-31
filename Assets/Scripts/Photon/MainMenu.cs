@@ -6,14 +6,13 @@ public class MainMenu : MonoBehaviour
 {
 		private string roomName = "polcon";
 		public PhotonHashtable customSettings;
-		public static string[] playerPrefabs = {"game","film","theater","books"};
+		public static string[] playerPrefabs = {"game","film","theatre","books"};
 		public static string selectedHero = null;
-
-	public GameObject camera_pc;
-	public GameObject camera_oculus;
+		GameManager gameManager;
 	
 		void Awake ()
 		{
+				gameManager = GetComponent<GameManager> ();
 				//PhotonNetwork.logLevel = NetworkLogLevel.Full;
 				//Connect to the main photon server. This is the only IP and port we ever need to set(!)
 				if (!PhotonNetwork.connected)
@@ -55,8 +54,6 @@ public class MainMenu : MonoBehaviour
 
 		void CreateRoomAsSpectator ()
 		{
-		PlayerNetwork.camera = camera_pc;
-
 				GUILayout.Label ("CREATE ROOM", GUILayout.Width (150));
 				if (GUILayout.Button ("GO")) {
 						PhotonNetwork.CreateRoom (roomName, true, true, 10, InitRoomSettings (), null);	
@@ -66,12 +63,7 @@ public class MainMenu : MonoBehaviour
 		void JoinRoomAsOneOfHeroes ()
 		{
 				GUILayout.Label ("WYBIERZ BOHATERA", GUILayout.Width (150));
-
-		camera_pc.SetActive (false);
-		camera_oculus.SetActive (true);
-		PlayerNetwork.camera = camera_oculus;
-
-		if (PhotonNetwork.GetRoomList ().Length > 0) {
+				if (PhotonNetwork.GetRoomList ().Length > 0) {
 						customSettings = PhotonNetwork.GetRoomList () [0].customProperties;
 						//display available heroes
 						foreach (string name in playerPrefabs)

@@ -106,10 +106,13 @@ public class PlayerController : MonoBehaviour
 		
 				target.transform.RotateAround (target.transform.up, rotationAmount);
 
-		Quaternion q = Quaternion.identity;
-		OVRDevice.GetOrientation(0, ref q);
-		OVRDevice.GetOrientation(1, ref q);
-		target.transform.rotation = q; 
+
+		if (GameManager.isOculus ()) {
+						Quaternion q = Quaternion.identity;
+						//OVRDevice.GetOrientation(0, ref q);
+						OVRDevice.GetOrientation (1, ref q);
+						target.transform.rotation = q; 
+				}
 		
 				if (Input.GetKeyDown (KeyCode.Backslash) || Input.GetKeyDown (KeyCode.Plus)) {
 						walking = !walking;
