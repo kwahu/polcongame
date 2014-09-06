@@ -28,7 +28,7 @@ public class CoinRespawn : Photon.MonoBehaviour {
 	 
 	void OnTriggerEnter(Collider other)
 	{
-		if(other.GetComponent<PhotonView>().isMine)
+//		if(other.GetComponent<PhotonView>().isMine)
 		if ( respawned )
 		{
 			var coinCollector = other.gameObject.GetComponent<PlayerNetwork>();

@@ -32,7 +32,7 @@ public class Switch : MonoBehaviour {
 	}
 
 	public void Trigger(){
-		animator.SetBool("trigger", true);
+		if(animator)	animator.SetBool("trigger", true);
 		
 		foreach (GameObject traget in targets){
 			Debug.Log (traget);

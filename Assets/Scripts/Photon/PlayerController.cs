@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 		public Rigidbody target;
 		public Collider collider;
 		// The object we're steering
-		 float speed = 4.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 1f, jumpSpeed = 4.0f;
+		float speed = 4.0f, walkSpeedDownscale = 2.0f, turnSpeed = 2.0f, mouseTurnSpeed = 3f, jumpSpeed = 4.0f;
 		// Tweak to ajust character responsiveness
 		public LayerMask groundLayers = -1;
 		// Which layers should be walkable?
@@ -25,11 +25,10 @@ public class PlayerController : MonoBehaviour
 		// Assign to this delegate to respond to the controller jumping
 	
 	
-		private const float inputThreshold = 0.01f,directionalJumpFactor = 0.7f;
-
-	 float groundDrag = 20.0f;
+		private const float inputThreshold = 0.01f, directionalJumpFactor = 0.7f;
+		float groundDrag = 20.0f;
 		// Tweak these to adjust behaviour relative to speed
-		 float groundedCheckOffset = -0.1f;
+		float groundedCheckOffset = -0.1f;
 		// Tweak so check starts from just within target footing
 		private const float groundedDistance = 0.25f;
 		// Tweak if character lands too soon or gets stuck "in air" often
@@ -90,9 +89,9 @@ public class PlayerController : MonoBehaviour
 				if (isRemotePlayer)
 						return;
 
-				if (GameManager.isOculus ())
-						ApplyOculusRotation ();
-				else
+				//if (GameManager.isOculus ())
+				//		ApplyOculusRotation ();
+				//else
 						StandardRotation ();
 
 				Walking ();
@@ -102,7 +101,8 @@ public class PlayerController : MonoBehaviour
 		void StandardRotation ()
 		{
 				float rotationAmount;
-				if (Input.GetMouseButton (1) && (!requireLock || controlLock || Screen.lockCursor)) {
+				if (Input.GetMouseButton (1)) {//&& (!requireLock || controlLock || Screen.lockCursor)) {
+						
 						// If the right mouse button is held, rotation is locked to the mouse
 						if (controlLock) {
 								Screen.lockCursor = true;
@@ -113,9 +113,10 @@ public class PlayerController : MonoBehaviour
 						if (controlLock) {
 								Screen.lockCursor = false;
 						}
-			
-						rotationAmount = Input.GetAxis ("Horizontal") * turnSpeed * Time.deltaTime;
+
+						rotationAmount = Input.GetAxis ("Horizontal2") * turnSpeed * Time.deltaTime;
 				}
+				
 				target.transform.RotateAround (target.transform.up, rotationAmount);
 		}
 
@@ -145,8 +146,8 @@ public class PlayerController : MonoBehaviour
 								return Mathf.Abs (sidestep) > Mathf.Abs (horizontal) ? sidestep : horizontal;
 						} else {
 								//float sidestep = -(Input.GetKey (KeyCode.Q) ? 1 : 0) + (Input.GetKey (KeyCode.E) ? 1 : 0);
-				float sidestep = Input.GetAxis ("Horizontal");
-				return sidestep;
+								float sidestep = Input.GetAxis ("Horizontal");
+								return sidestep;
 						}
 				}
 		}
@@ -167,16 +168,16 @@ public class PlayerController : MonoBehaviour
 				if (isRemotePlayer)
 						return;
 
-		target.drag = 0;
+				target.drag = 0;
 				
 
 				if (grounded) {
-			target.drag = groundDrag;
+						target.drag = groundDrag;
 						if (Input.GetButton ("Jump")) {
 
 								// Handle jumping
 								
-				target.AddForce (jumpSpeed * target.transform.up + target.velocity.normalized * directionalJumpFactor, ForceMode.VelocityChange);
+								target.AddForce (jumpSpeed * target.transform.up + target.velocity.normalized * directionalJumpFactor, ForceMode.VelocityChange);
 								// When jumping, we set the velocity upward with our jump speed
 								// plus some application of directional movement
 				
@@ -193,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
 
 				// Only allow movement controls if we did not just jump
-				Vector3 movement = Input.GetAxis ("Vertical") * target.transform.forward +SidestepAxisInput * target.transform.right;
+		Vector3 movement = Input.GetAxis ("Vertical") * target.transform.forward + SidestepAxisInput * target.transform.right;
 		
 				float appliedSpeed = walking ? speed / walkSpeedDownscale : speed;
 				// Scale down applied speed if in walk mode
@@ -206,10 +207,10 @@ public class PlayerController : MonoBehaviour
 				if (movement.magnitude > inputThreshold) {
 						// Only apply movement if we have sufficient input
 
-			if(grounded)
-					target.AddForce (movement.normalized * appliedSpeed, ForceMode.VelocityChange);//VelocityChange
-			//else
-			//	target.AddForce (movement.normalized * appliedSpeed/15, ForceMode.VelocityChange);//VelocityChange
+						if (grounded)
+								target.AddForce (movement.normalized * appliedSpeed, ForceMode.VelocityChange);//VelocityChange
+						//else
+						//	target.AddForce (movement.normalized * appliedSpeed/15, ForceMode.VelocityChange);//VelocityChange
 
 				} else {
 						// If we are grounded and don't have significant input, just stop horizontal movement
@@ -231,9 +232,5 @@ public class PlayerController : MonoBehaviour
 			target.transform.position + target.transform.up * -(groundedCheckOffset + groundedDistance));
 		}
 
-	void OnCollisionEnter(Collision col)
-	{
-		Debug.Log ("kolizja!");
 
-	}
 }
