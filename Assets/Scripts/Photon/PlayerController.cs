@@ -89,9 +89,9 @@ public class PlayerController : MonoBehaviour
 				if (isRemotePlayer)
 						return;
 
-				//if (GameManager.isOculus ())
-				//		ApplyOculusRotation ();
-				//else
+			//	if (GameManager.isOculus ())
+			//			ApplyOculusRotation ();
+			//	else
 						StandardRotation ();
 
 				Walking ();

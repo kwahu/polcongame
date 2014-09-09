@@ -9,6 +9,8 @@ public class Switch : MonoBehaviour {
 
 	public GameObject[] targets; // any StateObject (Bridge, Doors, etc.)
 	public bool debugTrigger = false; // usefull in development as a trigger button in inspector
+	public bool onlyOnce = false;
+	bool triggered = false;
 
 	private bool is_on;
 	private Animator animator;
@@ -20,7 +22,7 @@ public class Switch : MonoBehaviour {
 	void FixedUpdate() {
 		if (debugTrigger == true) {
 			debugTrigger = false;
-			Trigger ();
+			Trigger();
 		}
 	}
 
@@ -28,10 +30,19 @@ public class Switch : MonoBehaviour {
 		/* Call Trigger() any way you want - I just didn't want to mess with player;
 		 * hence, such a simple example - this OnCollisionEnter() is to be removed. 
 		 */ 
-		Trigger ();
+		if(!onlyOnce)
+		{
+			Trigger ();
+		}
+		else
+		{
+			if(!triggered)
+				Trigger ();
+		}
 	}
 
 	public void Trigger(){
+		triggered = true;
 		if(animator)	animator.SetBool("trigger", true);
 		
 		foreach (GameObject traget in targets){
